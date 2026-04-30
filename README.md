@@ -74,7 +74,7 @@ python train_pnp_lora.py
 *   **Output**:
     *   `params_S.pth`, `params_B.pth` (LoRA weights)
     *   `backbone_with_lora_S_merged_resnet.pth` (Suppression-only model)
-    *   `backbone_with_lora_SB_merged_resnet223.pth` (Final PnP-LoRA model)
+    *   `backbone_with_lora_SB_merged_resnet.pth` (Final PnP-LoRA model)
 
 ### 3️⃣ Evaluate Robustness
 Evaluate the model's resistance to fine-tuning (S-domain) and compare it with baselines.
@@ -84,7 +84,7 @@ python evaluate_and_curve.py \
   --merged_sb_otr_path ./backbone_with_lora_SB_merged_resnet.pth \
   --original_path ./checkpoints/resnet18_cifar10_best.pth \
   --epochs 20 \
-  --lr 7e-6 \
+  --lr 0.56e-5 \
   --out_curve otr_compare.pt
 ```
 *   **Output**:
