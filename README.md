@@ -1,5 +1,3 @@
-Here is the fully English version of the `README.md`, tailored for open-source publication. It is structured professionally, with a strong emphasis on data provenance and execution commands.
-
 ***
 
 # 🛡️ PnP-LoRA: Plug-and-Play Low-Rank Adaptation for Non-Transferable Learning
