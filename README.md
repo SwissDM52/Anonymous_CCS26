@@ -45,7 +45,7 @@ First, train a standard ResNet-18 on the source domain (CIFAR-10).
 ```bash
 python pretrain_backbone.py \
   --dataset cifar10 \
-  --epochs 100 \
+  --epochs 50 \
   --batch_size 128 \
   --lr 0.001 \
   --weight_decay 5e-4 \
