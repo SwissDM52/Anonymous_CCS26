@@ -63,11 +63,10 @@ python train_pnp_lora.py
     *   **Suppressor**: The Suppressor is trained on the suppression domain with randomized supervision. Its goal is to weaken task-relevant representations for the suppression domain, making downstream fine-tuning less effective.
     *   **Booster**: The Booster is trained on the original domain to preserve the model's original utility. It helps maintain performance on benign/original data while reducing interference with the Suppressor.
     *   **Merging**: After training, the Suppressor and Booster updates are merged into the backbone model through parameter-based merging. The released model keeps the same architecture and inference interface as the original backbone.
-    *   
 *   **Output**:
-    *   `params_S.pth`, `params_B.pth` (LoRA weights)
-    *   `backbone_with_lora_S_merged_resnet.pth` (Suppression-only model)
-    *   `backbone_with_lora_SB_merged_resnet.pth` (Final PnP-LoRA model)
+    *   `params_S.pth`, `params_B.pth` (weights of the Suppressor and Booster.)
+    *   `backbone_with_lora_S_merged_resnet.pth` (merging the Suppressor into the backbone.)
+    *   `backbone_with_lora_SB_merged_resnet.pth` (protected model with merging both the Suppressor and the Booster into the backbone.)
 
 ### 3️⃣ Evaluate Robustness
 Evaluate the model's resistance to fine-tuning (S-domain) and compare it with baselines.
