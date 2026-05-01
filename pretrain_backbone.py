@@ -29,8 +29,7 @@ def get_cifar10_loaders(
     transform_test = transforms.Compose([
     transforms.Resize(image_size),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225]),
+    transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2470, 0.2435, 0.2616]),
 ])
 
     train_set = datasets.CIFAR10(
@@ -141,7 +140,7 @@ def main():
     parser.add_argument("--dataset", type=str, default="cifar10",
                         choices=["cifar10", "mnist"],
                         help="which dataset to pretrain on")
-    parser.add_argument("--epochs", type=int, default=100)
+    parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--lr", type=float, default=0.001)
     parser.add_argument("--weight_decay", type=float, default=5e-4)
@@ -166,7 +165,7 @@ def main():
             args.data_root, args.batch_size
         )
 
-    model = resnet18(pretrained=True)
+    model = resnet18(weights=None)
     model.fc = nn.Linear(model.fc.in_features, num_classes)
     model = model.to(device)
 
@@ -179,7 +178,7 @@ def main():
     )
     scheduler = optim.lr_scheduler.MultiStepLR(
         optimizer,
-        milestones=[60, 80, 90],
+        milestones=[25, 40],
         gamma=0.2,
     )
 
