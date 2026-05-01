@@ -28,13 +28,12 @@ pip install torch torchvision peft matplotlib pillow numpy
 
 ## 📦 Data Preparation
 
-This project automates the entire data preparation process. **No manual dataset preparation is required.**
 
 | Dataset | Role | Source & Handling |
 | :--- | :--- | :--- |
-| **CIFAR-10** | Benign Task (B-Domain) | Automatically downloaded via `torchvision.datasets.CIFAR10` to `./data/`. Used to train Adapter-B. |
-| **TinyImageNet-200** | Suppression Task (S-Domain) | Automatically downloaded from `http://cs231n.stanford.edu/tiny-imagenet-200.zip` and extracted. The script **randomly samples 10 classes** (fixed seed `seed=0`) to create a subset. |
-| **`tiny10_wnids.txt`** | Reproducibility | The list of sampled 10 classes is saved to this file upon first run. Subsequent runs load this file to ensure the exact same subset is used, guaranteeing experimental reproducibility. |
+| **CIFAR-10** | Benign Task  | Automatically downloaded via `torchvision.datasets.CIFAR10` to `./data/`. |
+| **TinyImageNet-200** | Suppression Task | Automatically downloaded from `http://cs231n.stanford.edu/tiny-imagenet-200.zip` and extracted. We randomly sample 10 classes to create a subset. |
+
 
 ## 🚀 Quick Start
 
