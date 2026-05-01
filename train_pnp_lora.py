@@ -70,7 +70,7 @@ def ensure_tinyimagenet_downloaded():
         with zipfile.ZipFile("tiny.zip", "r") as zf:
             zf.extractall(".")
         print("Extracted TinyImageNet to ./tiny-imagenet-200")
-    return "./data/tiny-imagenet-200"
+    return "./tiny-imagenet-200"
 
 _selected_tiny_wnids = None
 
@@ -155,6 +155,23 @@ transform_test = transforms.Compose([
             mean=[0.4914, 0.4822, 0.4465],
             std=[0.2470, 0.2435, 0.2616]),    ])
 
+def resnet_feature_activation_loss(model, x):
+    m = model.resnet if hasattr(model, "resnet") else model
+
+    h = m.conv1(x)
+    h = m.bn1(h)
+    h = m.relu(h)
+    h = m.maxpool(h)
+
+    h = m.layer1(h)
+    h = m.layer2(h)
+    h = m.layer3(h)
+    h = m.layer4(h)
+
+    h = m.avgpool(h)
+    h = torch.flatten(h, 1)
+
+    return (h ** 2).mean()
 
 def calculate_lora_orthogonality_loss(model):
     ortho_loss = 0.0
@@ -272,7 +289,7 @@ def prepare_alternating_training(model, train_target):
 
 
 def load_resnet18_backbone(path: str, num_classes: int = 10) -> nn.Module:
-    backbone = resnet18(pretrained=False)
+    backbone = resnet18(weights=None)
     backbone.fc = nn.Linear(backbone.fc.in_features, num_classes)
     checkpoint = torch.load(path, map_location=device)
     backbone.load_state_dict(checkpoint['model_state_dict'])
@@ -332,7 +349,7 @@ def main():
 
         epochs = 20
         print("epochs:", epochs)
-
+        lambda_act= 0.0
         for epoch in range(epochs):
             prepare_alternating_training(lora_model, "adapter_S")
 
@@ -341,7 +358,8 @@ def main():
             for imgs, _ in suppression_loader:
                 optimizer_S.zero_grad()
                 logits = lora_model(imgs.to(device))
-                loss = kl_to_uniform(logits, 10)
+                loss_act = resnet_feature_activation_loss(lora_model, imgs.to(device))
+                loss = kl_to_uniform(logits, 10) + lambda_act * loss_act
                 loss.backward()
                 optimizer_S.step()
                 epoch_loss_s += loss.item()
