@@ -1,6 +1,6 @@
 ***
 
-# 🛡️ PnP-LoRA: Plug-and-Play Low-Rank Adaptation for Non-Transferable Learning
+# 🛡️ Artifact for Anonymous Review
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-%3E%3D1.13-orange.svg)](https://pytorch.org/)
@@ -8,7 +8,7 @@
 
 ## 📖 Overview
 
-This repository provides an implementation of **Plug-and-Play Low-Rank Adaptation (PnP-LoRA)** for **Non-Transferable Learning (NTL)**.
+This repository provides the implementation and experimental scripts for the submitted paper.
 
 To prevent unauthorized transfer learning while maintaining utility on the original task, we employ a dual-adapter architecture:
 1.  **Adapter-S (Suppression)**: Trained on out-of-distribution data (S-domain) to disrupt transferability.
