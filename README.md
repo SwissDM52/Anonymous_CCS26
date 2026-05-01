@@ -69,7 +69,6 @@ python train_pnp_lora.py
     *   `backbone_with_lora_SB_merged_resnet.pth` (protected model with merging both the Suppressor and the Booster into the backbone.)
 
 ### 3️⃣ Evaluate Robustness
-Evaluate the model's resistance to fine-tuning (S-domain) and compare it with baselines.
 
 ```bash
 python evaluate_and_curve.py \
@@ -81,7 +80,7 @@ python evaluate_and_curve.py \
 ```
 *   **Output**:
     *   `otr_compare.pt`: Training logs.
-    *   `otr_compare.png`: Fine-tuning accuracy comparison curve (PnP-LoRA vs. Original vs. Random).
+    *   `otr_compare.png`: Fine-tuning accuracy comparison curve.
 
 ## 🔬 Comparison with NTLBench (SOPHON & tNTL)
 
@@ -124,17 +123,4 @@ python evaluate_otr.py \
   --epochs 20 --lr 7e-6
 ```
 
-## 📂 Directory Structure
-
-```text
-.
-├── pretrain_backbone.py          # Script to pretrain the ResNet-18 backbone
-├── train_pnp_lora.py             # Script to train PnP-LoRA adapters and merge
-├── evaluate_otr.py               # Script to evaluate robustness and compare with SOTA
-├── checkpoints/                  # Directory for backbone weights
-├── saved_models/                 # Directory for SOPHON/tNTL comparison weights
-├── data/                         # Auto-downloaded CIFAR-10 and TinyImageNet data
-├── tiny10_wnids.txt              # List of selected TinyImageNet-10 classes
-└── otr_compare.png               # Generated evaluation plots
-```
 
