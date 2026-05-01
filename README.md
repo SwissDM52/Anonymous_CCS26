@@ -53,15 +53,17 @@ python pretrain_backbone.py \
 ```
 *   **Output**: `./checkpoints/resnet18_cifar10_best.pth`
 
-### 2️⃣ Train PnP-LoRA Adapters
-Run the main training script. It automatically loads the backbone, trains Adapter-S (via KL-Divergence) and Adapter-B (via Cross-Entropy + Orthogonality Loss), and merges them.
+### 2️⃣ Training Stage
+Run the main training script. It automatically loads the backbone, trains the Suppressor and Booster, and merges them to produce a protected model.
 
 ```bash
 python train_pnp_lora.py
 ```
 *   **Mechanism**:
-    *   **Adapter-S**: Optimized on TinyImageNet-10 to flatten output distribution.
-    *   **Adapter-B**: Optimized on CIFAR-10 with an orthogonality penalty (`0.5 * loss_orth`) to ensure it doesn't overlap with Adapter-S.
+    *   **Suppressor**: The Suppressor is trained on the suppression domain with randomized supervision. Its goal is to weaken task-relevant representations for the suppression domain, making downstream fine-tuning less effective.
+    *   **Booster**: The Booster is trained on the original domain to preserve the model's original utility. It helps maintain performance on benign/original data while reducing interference with the Suppressor.
+    *   **Merging**: After training, the Suppressor and Booster updates are merged into the backbone model through parameter-based merging. The released model keeps the same architecture and inference interface as the original backbone.
+    *   
 *   **Output**:
     *   `params_S.pth`, `params_B.pth` (LoRA weights)
     *   `backbone_with_lora_S_merged_resnet.pth` (Suppression-only model)
