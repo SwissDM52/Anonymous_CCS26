@@ -82,45 +82,8 @@ python evaluate_and_curve.py \
     *   `otr_compare.pt`: Training logs.
     *   `otr_compare.png`: Fine-tuning accuracy comparison curve.
 
-## 🔬 Comparison with NTLBench (SOPHON & tNTL)
+## 📝 Note for Reviewers
 
-To benchmark against state-of-the-art NTL methods like **SOPHON** and **tNTL**, this project integrates with the unified benchmark [NTLBench](https://github.com/tmllab/NTLBench).
-
-Since SOPHON and tNTL require specific training pipelines not included in this repository, follow these steps to generate their weights for comparison:
-
-### 1. Clone NTLBench
-```bash
-git clone https://github.com/tmllab/NTLBench.git
-cd NTLBench
-pip install -r requirements.txt
-```
-
-### 2. Train SOPHON and tNTL Models
-Run the NTLBench training script for the `cifar_tinyimagenet` domain pair:
-```bash
-# Train SOPHON
-python NTL_pretrain.py --config config/cifar_tinyimagenet/pretrain.yml --task_name tSOPHON
-
-# Train tNTL
-python NTL_pretrain.py --config config/cifar_tinyimagenet/pretrain.yml --task_name tNTL
-```
-
-### 3. Link Checkpoints to This Project
-Move the generated weights to this project's `./saved_models/` directory:
-```bash
-cp ./saved_models/SOPHON_cifar_tinyimagenet_resnet18_std.pth ../saved_models/
-cp ./saved_models/tNTL_cifar_tinyimagenet_resnet18_std.pth ../saved_models/
-```
-
-### 4. Run Unified Evaluation
-Update the `evaluate_otr.py` arguments to include these paths:
-```bash
-python evaluate_otr.py \
-  --merged_sb_otr_path ./backbone_with_lora_SB_merged_resnet223.pth \
-  --original_path ./checkpoints/resnet18_cifar10_best.pth \
-  --sophon_path ./saved_models/SOPHON_cifar_tinyimagenet_resnet18_std.pth \
-  --ntl_path ./saved_models/tNTL_cifar_tinyimagenet_resnet18_std.pth \
-  --epochs 20 --lr 7e-6
-```
+This repository is prepared solely for double-blind review purposes. It contains all necessary scripts, configuration files, and instructions to reproduce Setting No.1 from the paper. After the paper is accepted, this repository will be updated and released as a public GitHub project for publication.
 
 
