@@ -138,29 +138,3 @@ python evaluate_otr.py \
 └── otr_compare.png               # Generated evaluation plots
 ```
 
-## 📝 Citation
-
-If you use this code in your research, please consider citing:
-```bibtex
-@misc{pnp_lora_ntl_2025,
-  author = {Your Name},
-  title = {PnP-LoRA: Plug-and-Play Low-Rank Adaptation for Non-Transferable Learning},
-  year = {2025},
-  publisher = {GitHub},
-  url = {https://github.com/your-repo/pnp-lora-ntl}
-}
-```
-
-If you use the NTLBench comparison results, please cite their paper:
-```bibtex
-@article{hong2025toward,
-  title={Toward Robust Non-Transferable Learning: A Survey and Benchmark},
-  author={Hong, Ziming and Xiang, Yongli and Liu, Tongliang},
-  journal={arXiv preprint arXiv:2502.13593},
-  year={2025}
-}
-```
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
