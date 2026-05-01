@@ -67,7 +67,7 @@ def ensure_tinyimagenet_downloaded():
         with zipfile.ZipFile("tiny.zip", "r") as zf:
             zf.extractall(".")
         print("Extracted TinyImageNet to ./tiny-imagenet-200")
-    return "./data/tiny-imagenet-200"
+    return "./tiny-imagenet-200"
 
 
 def load_tinyimagenet10(transform_train, transform_test=None,
@@ -357,13 +357,6 @@ def main():
         "Original": model_original,
         "PnP-LoRA": model_merged_sb_otr_yes,
     }
-
-    print("\n" + "=" * 60)
-    print("  Trainable Parameters per Model (unit: MB)")
-    print("=" * 60)
-    for name, model in models_dict.items():
-        print_trainable_parameters_MB(model, name=name)
-    print("=" * 60 + "\n")
 
     optimizers = {}
     schedulers = {}
