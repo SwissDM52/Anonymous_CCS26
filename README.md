@@ -18,14 +18,6 @@ Backbone: ResNet-18
 Metric: Classification accuracy
 ```
 
-## ✨ Key Features
-
--   **Decoupled Dual-Adapter Architecture**: Independent optimization for suppression and benign tasks.
--   **LoRA Orthogonality Regularization**: Ensures suppression operations do not degrade original task representations.
--   **Plug-and-Play Compatibility**: Supports `merge_and_unload`, outputting standard models compatible with any inference framework.
--   **Automated Data Pipeline**: Built-in logic for downloading CIFAR-10 and generating a deterministic TinyImageNet-10 subset (reproducible across environments).
--   **Unified Evaluation**: Native support for comparing against SOTA NTL methods like **SOPHON** and **tNTL**.
-
 ## 🛠️ Installation
 
 We recommend using Python 3.8+ and PyTorch 1.13+.
