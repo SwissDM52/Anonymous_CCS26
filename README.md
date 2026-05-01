@@ -4,17 +4,18 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-%3E%3D1.13-orange.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 📖 Overview
 
-This repository provides the implementation and experimental scripts for the submitted paper.
+This repository provides the implementation and experimental scripts for the submitted paper. The goal of this artifact is to help reviewers inspect the implementation and verify the main experimental pipeline. We provide the results for Setting No.1 reported in Table 1 of the paper.
 
-To prevent unauthorized transfer learning while maintaining utility on the original task, we employ a dual-adapter architecture:
-1.  **Adapter-S (Suppression)**: Trained on out-of-distribution data (S-domain) to disrupt transferability.
-2.  **Adapter-B (Benign)**: Trained on the original task data (B-domain) to preserve performance.
+In this setting, the model is first trained on the original domain, CIFAR-10, and then evaluated under downstream fine-tuning on the suppression domain, ImageNet.
 
-An **Orthogonality Constraint** is introduced to minimize interference between the two adapters. The final model can be merged into the backbone and distributed as a standard PyTorch model, requiring no architectural changes for the end-user.
+```text
+Original domain: CIFAR-10
+Suppression domain: TinyImageNet-10
+Backbone: ResNet-18
+Metric: Classification accuracy
 
 ## ✨ Key Features
 
