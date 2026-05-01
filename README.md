@@ -9,13 +9,14 @@
 
 This repository provides the implementation and experimental scripts for the submitted paper. The goal of this artifact is to help reviewers inspect the implementation and verify the main experimental pipeline. We provide the results for Setting No.1 reported in Table 1 of the paper.
 
-In this setting, the model is first trained on the original domain, CIFAR-10, and then evaluated under downstream fine-tuning on the suppression domain, ImageNet.
+In this setting, the model is first trained on the original domain and then evaluated under downstream fine-tuning on the suppression domain.
 
 ```text
 Original domain: CIFAR-10
 Suppression domain: TinyImageNet-10
 Backbone: ResNet-18
 Metric: Classification accuracy
+```
 
 ## ✨ Key Features
 
