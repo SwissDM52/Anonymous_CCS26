@@ -72,7 +72,7 @@ python train_pnp_lora.py
 
 ```bash
 python evaluate_and_curve.py \
-  --merged_sb_otr_path ./backbone_with_lora_SB_merged_resnet.pth \
+  --merged_sb_path ./backbone_with_lora_SB_merged_resnet.pth \
   --original_path ./checkpoints/resnet18_cifar10_best.pth \
   --epochs 20 \
   --lr 0.56e-5 \
